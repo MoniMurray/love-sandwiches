@@ -45,14 +45,14 @@ def validate_data(values):
 
     return True
 
-def update_sales_worksheet(data):
-    """
-    Update sales workseeh, add new row with the list data provided
-    """
-    print("Updating sales worksheet...")
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(data)
-    print("Successfully updated Sales Worksheet")
+# def update_sales_worksheet(data):
+#     """
+#     Update sales workseeh, add new row with the list data provided
+#     """
+#     print("Updating sales worksheet...")
+#     sales_worksheet = SHEET.worksheet("sales")
+#     sales_worksheet.append_row(data)
+#     print("Successfully updated Sales Worksheet")
 
 def calculate_surplus_data(sales_row):
     """
@@ -70,14 +70,14 @@ def calculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return surplus_data
 
-def update_surplus_worksheet(data):
-    """
-    Update surplus worksheet, add new row with the new surplus data calculated in Calculate_Surplus_Data()
-    """
-    print("Updating surplus worksheet...")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(data)
-    print("Successfully updated Surplus Worksheet")
+# def update_surplus_worksheet(data):
+#     """
+#     Update surplus worksheet, add new row with the new surplus data calculated in Calculate_Surplus_Data()
+#     """
+#     print("Updating surplus worksheet...")
+#     surplus_worksheet = SHEET.worksheet("surplus")
+#     surplus_worksheet.append_row(data)
+#     print("Successfully updated Surplus Worksheet")
 
 def update_worksheet(data, worksheet):
     """
@@ -89,6 +89,23 @@ def update_worksheet(data, worksheet):
     worksheet_to_update.append_row(data)
     print(f"{worksheet} successfully updated")
 
+def get_last_5_entries_sales():
+    """
+    collects columns of data from sales worksheet, collecting 
+    the last 5 entries for each sandwich type and returns the 
+    data as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        # column = sales.col_values(#) would give you the values in the one 
+        # column whose number you specify here, but we need the result of all 6 of the columns
+        columns.append(column[-5:])
+        # this gives you a slice of each of the last 5 entries in the column
+    return columns
+   
 
 def main():
     """	
@@ -101,4 +118,6 @@ def main():
     update_worksheet(new_surplus_data, "surplus")
 
 print ("Welcome to Love  Sandwiches data automation")
-main()
+# main()
+
+sales_columns = get_last_5_entries_sales()
