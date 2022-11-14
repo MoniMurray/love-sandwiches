@@ -121,6 +121,22 @@ def calculate_stock_data(data):
         new_stock_data.append(round(stock_num))
     return new_stock_data
 
+# challenge
+def get_stock_values():
+    """
+    Make a request to a worksheet
+    to retrieve the sandwich type headings [0]
+    then build a dict containting headings as keys
+    stock_values as values
+    """
+    worksheet_header = SHEET.worksheet("sales")
+    
+    data = worksheet_header.get_all_values()
+    
+    headings = data[0]
+        
+    print(headings)
+
 def main():
     """	
     Run all program functions	
@@ -133,7 +149,9 @@ def main():
     sales_columns = get_last_5_entries_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
+    
+    return stock_data
 
-print ("Welcome to Love  Sandwiches data automation")
-main()
-
+# print ("Welcome to Love  Sandwiches data automation")
+# stock_data = main()
+get_stock_values()
