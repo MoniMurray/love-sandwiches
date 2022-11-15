@@ -138,6 +138,7 @@ def get_stock_values(data):
     stock_dictionary = dict(zip(headings, stock_data))
     
     print(stock_dictionary)
+    return stock_dictionary
 
 def main():
     """	
