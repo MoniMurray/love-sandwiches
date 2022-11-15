@@ -122,20 +122,22 @@ def calculate_stock_data(data):
     return new_stock_data
 
 # challenge
-def get_stock_values():
+def get_stock_values(data):
     """
     Make a request to a worksheet
     to retrieve the sandwich type headings [0]
     then build a dict containting headings as keys
     stock_values as values
     """
-    worksheet_header = SHEET.worksheet("sales")
+    headings = SHEET.worksheet("sales").get_all_values()[0]
     
-    data = worksheet_header.get_all_values()
+    # data = SHEET.worksheet("sales").get_all_values()[-1]
     
-    headings = data[0]
-        
-    print(headings)
+    # headings = data[0]
+    # stock = data[-1]
+    stock_dictionary = dict(zip(headings, stock_data))
+    
+    print(stock_dictionary)
 
 def main():
     """	
@@ -152,6 +154,6 @@ def main():
     
     return stock_data
 
-# print ("Welcome to Love  Sandwiches data automation")
-# stock_data = main()
-get_stock_values()
+print ("Welcome to Love  Sandwiches data automation")
+stock_data = main()
+get_stock_values(stock_data)
